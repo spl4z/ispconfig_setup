@@ -7,6 +7,9 @@ InstallSQLServer() {
     echo -n "Installing Database server (MySQL)... "
     echo "mysql-server-5.6 mysql-server/root_password password $CFG_MYSQL_ROOT_PWD" | debconf-set-selections
     echo "mysql-server-5.6 mysql-server/root_password_again password $CFG_MYSQL_ROOT_PWD" | debconf-set-selections
+    wget http://dev.mysql.com/get/mysql-apt-config_0.3.5-1debian8_all.deb
+    dpkg -i mysql-apt-config_0.3.5-1debian8_all.deb
+    apt-get update
     apt-get install mysql-community-server
     sed -i 's/bind-address		= 127.0.0.1/#bind-address		= 127.0.0.1/' /etc/mysql/my.cnf
     echo -e "[${green}DONE${NC}]\n"
